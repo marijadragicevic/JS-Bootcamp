@@ -1,0 +1,49 @@
+.crveni_paragraf{
+    color: red;
+}
+.desno_poravnanje{
+    text-align: right;
+}
+
+/* vise elemenata sa istim svojstvom */
+h3,h4 {
+    color:orange;
+
+}
+.drugi, #treci {
+        background-color: yellow;
+}
+/* prioritet: selektor < klasa < id */
+
+li {
+    color: green;
+}
+.kurs{
+    color: blue;
+}
+#js{
+    color: red;
+}
+
+/* selektovati sve paragrf unutar div elementa */
+div p{
+    text-decoration: underline;
+}
+
+div .podparagraf{
+    font-weight: bold;
+}
+
+#divizija>p{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* selektuje samo direktne potomke ;znak >(vece) to radi */
+
+/* pseudno klase ; 3 oznacava svaki treci ;imamo i 3n to je svaki treci ;moze i even i odd*/
+ol li:nth-child(3){
+    font-style: italic;
+}
+ol li:nth-child(odd){
+    background-color: greenyellow;
+}
