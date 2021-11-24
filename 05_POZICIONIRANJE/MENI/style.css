@@ -1,0 +1,85 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* div elm nema veze sa menijem */
+#rest{
+    position: relative;
+    top: 150px;
+}
+
+/* HORIZONTALNI MENI*/
+ nav{
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+nav ul{
+    overflow: hidden;
+    list-style-type: none;
+
+}
+
+nav ul li{
+    float: left;
+    background-color: dimgrey;
+    border: 1px solid white;
+    width: 25%;
+    text-align: center;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    /* linkovi su inline elementi i da bio klikljiv duz povrsinom  dodajemo dispaly block*/
+    display: block;
+    padding: 10px 0;
+}
+
+nav ul li a:hover{
+    background-color: tomato;
+} */
+
+/* PADAJUCI MENI */
+.submenu{
+    display: none;
+}
+
+.dropdown:hover .submenu{
+    display: block;
+}
+
+.dropdown:hover .submeni{
+    display: block;
+}
+
+/* VERTIKALNI MENI*/
+
+footer{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+}
+footer ul {
+    list-style-type: none;
+}
+
+footer ul li{
+    width: 25%;
+    background-color: yellowgreen;
+
+}
+
+footer ul li a{
+    display: block;
+    padding: 10px 0px 10px 5px;
+    text-decoration: none;
+    color: white;
+}
+footer ul li a:hover{
+    background-color: wheat;
+}
+
