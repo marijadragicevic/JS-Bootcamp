@@ -22,7 +22,7 @@ if (b1 > b2) {
         console.log(`Srednji broj je ${b1}`);
         if (b2 > b3) {
             console.log(`Najveci broj je ${b2}`);
-            `Najmanji broj je ${b3}`
+            console.log(`Najmanji broj je ${b3}`);
         }
         else {
             console.log(`Najmanji broj je ${b2}`);

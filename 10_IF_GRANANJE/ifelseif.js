@@ -25,7 +25,7 @@ console.log(`Kod nakon if - else if`);
 ////////////////////////////////////////
 
 // 7.zad
-let bodovi = 85;
+let bodovi = 61;
 if (bodovi <= 50) {
     console.log(`pali ste ispit`);
 }
