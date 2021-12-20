@@ -203,6 +203,24 @@ let maxIndex = niz => {
 }
 console.log(maxIndex(niz));
 
+// 7.b)Odredi broj maksimalnih el celobrojnog niza
+let niz2 = [1, 2, 3, 4, 5]
+let maxBoj = niz => {
+    let max = niz[0];
+    let broj = 0;
+    for (let i = 1; i < niz.length; i++) {
+        if (max < niz[i]) {
+            max = niz[i];
+        }
+    }
+    for (i = 0; i < niz.length; i++) {
+        if (max == niz[i]) {
+            broj++;
+        }
+    }
+    return broj;
+}
+console.log(maxBoj(niz2));
 
 // 8.
 
@@ -223,10 +241,13 @@ console.log(minIndex(niz));
 
 
 // 9.
+/*
 let veciOdArSr = niz => {
 
+     //pozivanje funkcije koju smo napravili vec gore
+
     let br = 0;
-    let ArSr = niz => (niz.length != 0) ? sumaElemenata(niz) / niz.length : 0;
+    let ArSr = arsr(niz);
     for (let i = 0; i < niz.length; i++) {
         if (niz[i] > ArSr) {
             br++;
@@ -234,7 +255,27 @@ let veciOdArSr = niz => {
     }
     return br;
 }
-console.log(veciOdArSr(niz));
+console.log(veciOdArSr(niz));*/
+
+// bez pozivanja vec postojecih funkcija
+
+let veciOdSV = niz => {
+    let zbir = 0;
+    let br = 0;
+    for (let i = 0; i < niz.length; i++) {
+        zbir += niz[i];
+        br++;
+    }
+    let arsr = zbir / br;
+    let broj = 0;
+    for (let i = 0; i < niz.length; i++) {
+        if (niz[i] > arsr) {
+            broj++;
+        }
+    }
+    return broj;
+}
+console.log(veciOdSV(niz));
 
 // 10.
 let zbirPoz = niz => {
@@ -262,3 +303,170 @@ let parniBrojevi = niz => {
     return br;
 }
 console.log(parniBrojevi(niz));
+
+// 16. Dat je niz stavki za kupovinu (članovi niza su stringovi). Prolaskom kroz niz napraviti neuređenu listu i ispisati je u html dokument.
+
+let kupovina = ["hleb", "mleko", "jaja", "cokolada"];
+
+let neuredjenLista = niz => {
+    let lista = `<ul>`;
+    for (let i = 0; i < niz.length; i++) {
+        lista += `<li>${niz[i]}</li>`;
+    }
+    lista += `</ul>`;
+    return lista;
+}
+// slican nacin; na casu radjen;
+let ispisListe = niz => {
+    let rezultat = "";
+    rezultat += `<ul>`;
+    for (let i = 0; i < niz.length; i++) {
+        rezultat += `<li>${niz[i]}</li>`
+    }
+    rezultat += `</ul>`;
+    return rezultat;
+}
+// document.body.innerHTML += ispisListe(kupovina);
+// neuredjenLista(kupovina);
+
+document.getElementById(`d1`).innerHTML += ispisListe(kupovina);
+
+// 17. Dat je niz imena košarkaškog tima. Prolaskom kroz niz formirati tabelu u čijim su redovima imena tima, i tabelu ispisati u html dokument.
+
+let tim = ["Partizan", "Zvezda", "Napredak", "Mladost"];
+
+let KosarkaskiTim = niz => {
+    let tabela = `<table border="1" style="border-collapse:collapse;">`
+    for (let i = 0; i < niz.length; i++) {
+        tabela +=
+            `
+        <tr>
+        <td>${niz[i]}</td>
+        </tr>
+        `;
+    }
+    tabela += `</table>`
+    return tabela;
+}
+document.getElementById(`tabela`).innerHTML += KosarkaskiTim(tim);
+
+// 18. Dat je niz stringova čiji su članovi putanje do slika. Prikazati sve sliku u html dokumentu sa putanjama navedenim u nizu.
+
+let putanja = ["../06_RESPONSIVE/img/slika1.jpg", "../06_RESPONSIVE/img/slika2.jpg", "../06_RESPONSIVE/img/slika3.jpg"];
+
+let slika = niz => {
+    let img = "";
+    for (let i = 0; i < niz.length; i++) {
+        img += `<img src="${niz[i]}">`;
+    }
+    return img;
+}
+document.getElementById(`slika`).innerHTML += slika(putanja);
+
+// 19. Ispisati dužinu svakog elementa u nizu stringova.
+niz = ["sunce", "zemlja", "voda", "vazduha"];
+
+let duzinaEl = niz => {
+    for (let i = 0; i < niz.length; i++) {
+        console.log(niz[i].length);
+    }
+}
+duzinaEl(niz);
+// 20. Odrediti element u nizu stringova sa najvećom dužinom.
+
+let stringMaxDuzina = niz => {
+    let maxDuzina = niz[0].length;
+    let maxString = niz[0];
+    for (let i = 1; i < niz.length; i++) {
+        if (maxDuzina < niz[i].length) {
+            maxDuzina = niz[i].length;
+            maxString = niz[i];
+        }
+    }
+    return maxString;
+}
+console.log(stringMaxDuzina(niz));
+
+// 21. Odrediti broj elemenata u nizu stringova čija je dužina veća od prosečne dužine svih stringova u nizu.
+
+let vecaDuzina = niz => {
+    let suma = 0;
+    let br = 0;
+    for (let i = 0; i < niz.length; i++) {
+        suma += niz[i].length;
+        br++;
+    }
+    let Lsr = suma / br;
+    let broj = 0
+    for (let i = 0; i < niz.length; i++) {
+        if (niz[i].length > Lsr) {
+            broj++;
+        }
+    }
+    return broj;
+}
+console.log(vecaDuzina(niz));
+
+// moze i da se koriste 2 funkcije
+// prva funkcija
+let prosDuzina = niz => {
+    let suma = 0;
+    let broj = 0;
+    for (let i = 0; i < niz.length; i++) {
+        suma += niz[i].length;
+        broj++;
+    }
+    return (broj == 0) ? 0 : suma / broj;
+}
+console.log(prosDuzina(niz));
+//druga funkcija
+let brojVeciOdProsDuz = niz => {
+    let broj = 0;
+    let pd = prosDuzina(niz);
+    for (let i = 0; i < niz.length; i++) {
+        if (niz[i].length > pd) {
+            broj++;
+        }
+    }
+    return broj;
+}
+console.log(brojVeciOdProsDuz(niz));
+
+
+// 22. Odrediti broj elemenata u nizu stringova koji sadrže slovo 'a’. 
+
+let aSlovo = niz => {
+    let br = 0;
+    for (let i = 0; i < niz.length; i++) {
+        if (niz[i].includes("a")) {
+            br++;
+        }
+    }
+    return br;
+}
+console.log(aSlovo(niz));
+
+
+// 22.b) Odrediti broj ponavljanja slova 'a' u nizu stringova
+
+
+let brojKarakteraA = niz => {
+    let br = 0;
+    for (let i = 0; i < niz.length; i++) {
+        //niz[i] je string
+        let element = niz[i];
+        // sada prolazimo kroz sve karaktere stringa elementa
+        for (let j = 0; j < element.length; j++) {
+            if (element[j] == "a") {
+                br++;
+            }
+        }
+    }
+    return br;
+}
+console.log(brojKarakteraA(niz));
+
+
+// 23. Odrediti broj elemenata u nizu stringova koji počinju na slovo 'a' ili 'A’.
+
+
