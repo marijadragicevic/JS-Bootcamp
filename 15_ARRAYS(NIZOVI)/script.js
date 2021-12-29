@@ -469,4 +469,40 @@ console.log(brojKarakteraA(niz));
 
 // 23. Odrediti broj elemenata u nizu stringova koji počinju na slovo 'a' ili 'A’.
 
+//24.
 
+let a = [1, 3, 5, 7, 9];
+let b = [2, 4, 6, 8, 10];
+
+let noviNiz = (a, b) => {
+    let c = [];
+    for (let i = 0; i < a.length; i++) {
+
+        c[2 * i] = a[i];
+        c[2 * i + 1] = b[i];
+
+    }
+    return c;
+};
+let rez = noviNiz(a, b);
+console.log(rez);
+
+// ukoliko su nizovu a i b razlicite duzine
+let noviNiz2 = (a, b) => {
+    let c = [];
+    let m = Math.min(a.length, b.length); // odredjujemo koji niz je manji
+    for (let i = 0; i < m; i++) {
+        c.push(a[i]);
+        c.push(b[i]);
+    }
+    for (let i = m; i < a.length; i++) {
+        c.push(a[i]);
+    }
+    for (let i = m; i < b.length; i++) {
+        c.push(b[i]);
+    }
+    return c;
+};
+console.log(noviNiz2(a, b));
+
+// 25. 
