@@ -1,5 +1,6 @@
 import Auto from "./auto.js";
 
+
 /* ugradjene klase npr,
 new Date(), new String("..."), new Array(1,2,3)....*/
 
@@ -69,3 +70,5 @@ console.log(a5);
 // GETTERI I SETTERI SU POSEBNE METODE;TO SU METODE KOJE SE POZIVAJU KAO POLA
 // PRAKSA JE DA:
 // jednino geteri i seteri pristupaju poljima ,a ostale metode kao i objekti van klase zovu getere i setere
+
+////////////////////////////////////////////////////////////////////

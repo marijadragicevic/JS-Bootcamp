@@ -1,0 +1,33 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+}
+.container h2 {
+    color: rgb(8, 99, 202);
+    padding: 10px 0;
+    font-size: 1.7rem;
+    text-align: center;
+}
+.container ul{
+    list-style-type: none;
+    padding: 10px;
+}
+.container ul li{
+    background-color: rgb(3, 137, 247);
+    color: white;
+    padding: 10px;
+    margin-bottom:10px ;
+    font-size: 1.3rem;
+    border-radius: 5px;
+}
+/* .lineThrough {
+    text-decoration:line-through;
+     u style.css
+} */

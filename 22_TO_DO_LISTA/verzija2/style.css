@@ -1,0 +1,58 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.container {
+    margin: auto;
+}
+.container h2 {
+    color: rgb(8, 99, 202);
+    padding: 10px;
+    font-size: 1.7rem;
+}
+.container ul{
+    padding: 10px;
+    list-style-type: none;
+}
+.container ul li{
+    background-color: rgb(3, 137, 247);
+    color: white;
+    padding: 10px;
+    margin-bottom:10px ;
+    font-size: 1.3rem;
+    border-radius: 5px;
+    width: 40%;
+}
+form,div{
+    padding: 10px;
+}
+
+.container input[type="text"]{
+    border: 2px solid rgb(173, 173, 173);
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    width: 30%;
+}
+.container input[type="text"]:focus {
+    outline: none;
+    border: 2px solid orange;
+}
+.container input[type="submit"]{
+    border: none;
+    background-color: rgb(16, 218, 16);
+    color: white;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    width: 30%;
+}
+.container input[type="submit"]:hover{
+    background-color: green;
+
+}
