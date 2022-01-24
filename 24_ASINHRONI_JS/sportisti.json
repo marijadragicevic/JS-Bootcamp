@@ -1,0 +1,35 @@
+[
+    {
+        "imePrezime": "Pera Peric",
+        "visina": 185,
+        "timovi": [
+            "Napredak",
+            "Partizan",
+            "Lakers"
+        ]
+    },
+    {
+        "imePrezime": "Mika Mikic",
+        "visina": 190,
+        "timovi": [
+            "Lakers"
+        ]
+    },
+    {
+        "imePrezime": "Sima Peric",
+        "visina": 195,
+        "timovi": [
+            "Zvezda",
+            "Radnicki",
+            "Barselona"
+        ]
+    },
+    {
+        "imePrezime": "Jovan Jovic",
+        "visina": 175,
+        "timovi": [
+            "Zvezda",
+            "Partizan"
+        ]
+    }
+]
