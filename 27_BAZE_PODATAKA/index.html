@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- uspostavljamo konekciju sa bazom;asinh -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-firestore.js"></script>
+
+    <!-- prvo kopiramo script tag sa firebasa, pa posle povezivanje sa script.js -->
+    <script>
+        // ovo je za svaku bazu 
+        const firebaseConfig = {
+            apiKey: "AIzaSyBVkafVELOFXv_Kv1Xe8p235__oWbr42J8",
+            authDomain: "itbootcamp-js7-39427.firebaseapp.com",
+            projectId: "itbootcamp-js7-39427",
+            storageBucket: "itbootcamp-js7-39427.appspot.com",
+            messagingSenderId: "397984331662",
+            appId: "1:397984331662:web:098f69a05ac89b80f516df",
+            measurementId: "G-SCHV0NV0F4"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        let db = firebase.firestore();
+    </script>
+    <script src="script.js"></script>
+    <script src="film.js"></script>
+</body>
+
+</html>
