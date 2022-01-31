@@ -84,3 +84,29 @@ db.collection("costumers").doc("costumer1").delete()
     });
 
 console.log("Tekst poruka");
+
+// Drugi nacin za dodavanje dokumenta
+
+db.collection("tasks")
+    // nemamo mogucnost dodavanje id dokumentu i nastaje gore navedena situacija kada ne dodajemo id dokumentu
+    .add({
+        title: "Vezba za projekat",
+        description: "Vezbanje JS",
+        startDate: firebase.firestore.Timestamp.fromDate(new Date("2022-01-29 ")),
+        dueDate: null, // kada se ne zavrsava
+        priority: true
+    })
+    .then(() => {
+        console.log(`Uspeno dodat zadatak u kolekciju tasks`);
+    })
+    .catch((error) => {
+        console.log(`Desila se greska ${error}`);
+    })
+
+/*
+db.collection("....").add()     <=>     db.collection("....").doc().set()
+    -dodaje novi dokument sa randomm generisanim ID-em
+
+db.collection("....").doc(ID).set()
+    - dodaje novi dokument sa zadatim ID-em
+*/
