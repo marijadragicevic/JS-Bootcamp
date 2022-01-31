@@ -34,19 +34,34 @@
     </section>
 
     <!-- FORMA -->
-    <form action="">
-        <p>
-            <input type="text" class="poruka" placeholder="Your message...">
-            <input type="submit" value="Send">
-        </p>
-        <p>
-            <input type="text" class="username" placeholder="Update username...">
-            <input type="submit" value="Update">
-        </p>
+    <form action="" id="messageForm">
+        <input type="text" id="message" placeholder=" Your message...">
+        <input type="submit" value="Send">
     </form>
 
+    <form action="" id="usernameForm">
+        <input type="text" id="username" placeholder=" Update username...">
+        <input type="submit" value="Update">
+    </form>
 
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-firestore.js"></script>
 
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBVkafVELOFXv_Kv1Xe8p235__oWbr42J8",
+            authDomain: "itbootcamp-js7-39427.firebaseapp.com",
+            projectId: "itbootcamp-js7-39427",
+            storageBucket: "itbootcamp-js7-39427.appspot.com",
+            messagingSenderId: "397984331662",
+            appId: "1:397984331662:web:098f69a05ac89b80f516df",
+            measurementId: "G-SCHV0NV0F4"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        let db = firebase.firestore();
+    </script>
     <script src="script.js"></script>
 </body>
 
