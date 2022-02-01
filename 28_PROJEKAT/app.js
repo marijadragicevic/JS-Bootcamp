@@ -25,9 +25,16 @@ let chatroom3 = new Classroom("js", "pera");
 // });
 
 chatroom1.room = "js";
+// ispis dokumenata iz baze u konzoli
 chatroom1.getChats(d => {
     console.log(d.room);
 })
 ////////////////////////////////////////////////////////
 let lista = document.querySelector("section ul");
-let a = new ChatUI(lista);
+let chatUI = new ChatUI(lista);
+console.log(chatUI.list);
+
+// ispis dokumenata na stranici
+chatroom1.getChats(d => {
+    chatUI.templateLI(d);
+})

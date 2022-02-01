@@ -13,6 +13,24 @@
     margin: auto;
     background-color: #eee;
 }
+ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+}
+ul li{
+    background-color: rgb(214, 211, 211);
+    border-radius: 0px 10px 10px;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    padding: 15px 20px;
+}
+ul li p{
+    color: #777;
+    font-size: 0.8rem;
+}
 /* RESPONSIVE */
 @media (max-width:786px){
 
