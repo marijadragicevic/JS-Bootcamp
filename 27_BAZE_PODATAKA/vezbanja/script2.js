@@ -46,7 +46,7 @@ db.collection("costumers")
 /////////////////////////////////////////////////////////////
 
 // 1. Dohvatanje dokumenata u odredjenom redosledu
-// 2. Dohvatanje odredjenog broja dokm iz kolkc
+// 2. Dohvatanje odredjenog broja dokm iz kolkcije
 // 3. Dohvatanje dokumenata koji zadovoljavaju odredjne kriterijumr(filtriranje)
 
 // 1.

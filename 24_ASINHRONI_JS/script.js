@@ -176,7 +176,7 @@ let getUsers = (resolve, reject) => {
 
 // prvi nacin pisanja callback funkcija
 
-let zad2 = (array) => {
+let zad2 = array => {
     array.forEach(el => {
         if (el.website.slice(".com", -4)) {
             console.log(el.name);

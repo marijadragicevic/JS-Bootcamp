@@ -9,9 +9,9 @@ console.log(chatroom1.username, chatroom1.room);
 let chatroom2 = new Classroom("general", "Milena");
 // chatroom2.addChat("HR trening");
 // chatroom2.addChat(`Posaljite CV`)
-chatroom2.addChat(`Trening pisanja CV-a`)
-    .then(() => console.log(`Uspesno dodat chat`))
-    .catch(err => console.log(`Greska ${err}`))
-chatroom2.getChats(() => {
-
+// chatroom2.addChat(`Trening pisanja CV-a`)
+//     .then(() => console.log(`Uspesno dodat chat`))
+//     .catch(err => console.log(`Greska ${err}`))
+chatroom2.getChats(d => {
+    console.log(d);
 });

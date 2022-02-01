@@ -174,7 +174,7 @@ db.collection("tasks")
 /*
 let now = new Date();
 let year = now.getFullYear();
-let data1 = new Date(year, 0, 1); // 1..januar tekuce godine
+let data1 = new Date(year, 0, 1); // 1.januar tekuce godine
 let data2 = new Date(year + 1, 0, 1); // 1.januar naredne godine
 let data1Timestamp = firebase.firestore.Timestamp.fromDate(new Date(data1));
 let data2Timestamp = firebase.firestore.Timestamp.fromDate(new Date(data2));
@@ -183,7 +183,8 @@ db.collection("tasks")
     .where("dueDate", ">=", data1Timestamp)
     .where("dueDate", "<", data2Timestamp)
     // ovo dole nije potpuno
-    // .where("dueDate", "<=", firebase.firestore.Timestamp.fromDate(new Date("2022-12-31 23:59:59")))
+    // .where("dueDate", ">=", firebase.firestore.Timestamp.fromDate(new Date("2022-01-01 00:00:00")))
+    // .where("dueDate", "<", firebase.firestore.Timestamp.fromDate(new Date("2023-01-01 00:00:00")))
     .get()
     .then(snapshot => {
         if (!snapshot.empty) {

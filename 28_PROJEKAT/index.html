@@ -10,38 +10,47 @@
 </head>
 
 <body>
+
     <!-- HEADER SECTION -->
     <header>
-        <h2>ITBootcamp Chat</h2>
-        <h4>Choose a chatroom</h4>
+        <div class="container">
+            <h2>ITBootcamp Chat</h2>
+            <h4>Choose a chatroom</h4>
+        </div>
     </header>
 
     <!-- NAVBAR -->
     <nav>
-        <ul>
-            <li id="general"> <a href="#">#general</a></li>
-            <li id="js"> <a href="#">#js</a></li>
-            <li id="homeworks"> <a href="#">#homeworks</a></li>
-            <li id="tests"> <a href="#">#tests</a></li>
-        </ul>
+        <div class="container">
+            <button id="general">#general</button>
+            <button id="js">#js</button>
+            <button id="homeworks">#homeworks</button>
+            <button id="tests">#tests</button>
+        </div>
     </nav>
 
     <!-- ISPIS PORUKA -->
     <section class="ispis">
-        <ul>
+        <div class="container">
+            <ul>
 
-        </ul>
+            </ul>
+        </div>
     </section>
 
     <!-- FORMA -->
     <form action="" id="messageForm">
-        <input type="text" id="message" placeholder=" Your message...">
-        <input type="submit" value="Send">
+        <div class="container">
+            <input type="text" id="message" placeholder=" Your message...">
+            <input type="submit" value="Send">
+        </div>
     </form>
 
     <form action="" id="usernameForm">
-        <input type="text" id="username" placeholder=" Update username...">
-        <input type="submit" value="Update">
+        <div class="container">
+            <input type="text" id="username" placeholder=" Update username...">
+            <input type="submit" value="Update">
+        </div>
     </form>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->

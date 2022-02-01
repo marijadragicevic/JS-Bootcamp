@@ -12,7 +12,7 @@ setTimeout(() => {    // ovo nije blokirajuci kod, nastavlja sa ocitavanjem koda
 }, 1000 * 4);
 
 ///////////////////////////////////////////////////////////////
-// razlika izmedju anonimnih i arrow f je da arr uvek vrca za this window , a anonimne vracju objekat koji ju je pozvao metodu
+// razlika izmedju anonimnih i arrow f je da arr uvek vrca za this window , a anonimne vracju objekat koji je pozvao metodu
 
 let btn1 = document.getElementById("btn1");
 let btn2 = document.getElementById("btn2");

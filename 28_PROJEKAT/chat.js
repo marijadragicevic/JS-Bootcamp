@@ -36,7 +36,22 @@ export class Classroom {
 
     // kreirati callback metod getChats()
     getChats(callback) {
+        this.chats
+            .where("room", "==", this.room)
+            .orderBy("created_at")
+            .onSnapshot(snapshot => {
+                snapshot.docChanges().forEach(change => {
+                    // console.log(change.type); //proveravamo koja je promena nastala
+                    // if (change.type === "added") {
+                    //     console.log(`Promena u bazi`);
+                    // }
+                    if (change.type === "added") {
+                        // console.log(change.doc.data());
+                        callback(change.doc.data());// prosledjivanje dokumenta na ispis(ispis realizujemo kada realizujemo callback)
+                    }
 
+                });
+            })
     }
 
 

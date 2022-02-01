@@ -189,7 +189,6 @@ async function clickGetItems() {
         }
     });
 
-
     let data2 = await getItemreturnPromise("JSON/price.json");
     let tabela = document.createElement("table");
     data2.forEach(item => {

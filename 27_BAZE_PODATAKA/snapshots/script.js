@@ -80,7 +80,7 @@ db.collection("tasks")
                 btn.innerHTML = "Delete task!";
                 li.appendChild(btn);
             }
-            else if (type == "removed") {
+            else if (type === "removed") {
                 let li = document.getElementById(id);
                 li.remove();
             }

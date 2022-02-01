@@ -29,9 +29,8 @@ inputText.addEventListener("keyup", (e) => {
             // isprazniti input polje ne moze inputTextValue zato sto to pamti gore vrednost 
             // ne pristupa input polju,zato pisemo inputText.value;
             // pomocu reset isto
-            inputText.value = ""; // isprazni input polje nakon dodavanja el u ul
-
         }
+        inputText.value = ""; // isprazni input polje nakon dodavanja el u ul
     }
 
 });

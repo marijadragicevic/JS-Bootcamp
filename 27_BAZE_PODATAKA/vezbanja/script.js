@@ -9,7 +9,7 @@ console.log(costumers);
 let doc1 = costumers.doc("costumer1");
 console.log(doc1);
 
-//pristupanje doku mentu bez medju promenljive
+//pristupanje dokumentu bez medju promenljive
 let doc2 = db.collection("tasks").doc("task1");
 console.log(doc2);
 /*
@@ -21,7 +21,7 @@ Kod dokumenata imamo sledece operacije:
     Read: doc.get()
     Update: doc.update()
     Delete: doc.delete
-* Sve ove 4 operacije ako rezultat vracaju promise
+* Sve ove 4 operacije kao rezultat vracaju promise
   Sto znaci: Nakon njih lancamo .then() i .catch()
 */
 
@@ -97,7 +97,7 @@ db.collection("tasks")
         priority: true
     })
     .then(() => {
-        console.log(`Uspeno dodat zadatak u kolekciju tasks`);
+        console.log(`Uspesno dodat zadatak u kolekciju tasks`);
     })
     .catch((error) => {
         console.log(`Desila se greska ${error}`);
