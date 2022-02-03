@@ -15,7 +15,6 @@ export class Classroom {
         else {
             alert(`Wrong input!`);
         }
-
     }
     // geteri polja
     get room() {
@@ -27,17 +26,14 @@ export class Classroom {
 
     // Dodavanje nove poruke
     async addChat(mess) {
-        //kreiranje dokum/obj  prosledjujem bazi podataka
         let docChat = {
             message: mess,
             username: this.username,
             room: this.room,
-            // dohvatanjne trenutnog vremena 
             created_at: firebase.firestore.Timestamp.fromDate(new Date())
         }
-        // Da sacuvam dokument u db
         let response = await this.chats.add(docChat);
-        return response; // vracam promis i mogu za njega da kazem .then i .catch
+        return response;
     }
 
     // kreirati callback metod getChats()
@@ -50,9 +46,8 @@ export class Classroom {
                     if (change.type === "added") {
                         callback(change.doc.data());
                     }
-
                 });
-            })
+            });
     }
 
     updateUsername(newUsername) {

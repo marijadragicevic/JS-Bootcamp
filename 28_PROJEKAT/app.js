@@ -1,54 +1,33 @@
 import { Classroom } from "./chat.js";
 import { ChatUI } from "./ui.js";
 
-let chatroom1 = new Classroom("js", "mikamikic");
-console.log(chatroom1.username, chatroom1.room); // testiramo getere
-chatroom1.username = "Dusan"; // testiramo setere
-chatroom1.room = "general";
-console.log(chatroom1.username, chatroom1.room);
-
-let chatroom2 = new Classroom("general", "Milena");
-// chatroom2.addChat("HR trening");
-// chatroom2.addChat(`Posaljite CV`);
-// chatroom2.addChat(`Trening pisanja CV-a`)
-//     .then(() => console.log(`Uspesno dodat chat`))
-//     .catch(err => console.log(`Greska ${err}`))
-chatroom2.getChats(d => {
-    console.log(d);
-});
-
-// let chatroom3 = new Classroom("js", "p er a");
-// chatroom3.addChat("Neki tekst").then(() => {
-//     console.log(`Uspesno dodat chat`);
-// }).catch((err) => {
-//     console.log(`Greska ${err}`);
-// });
-
-chatroom1.room = "js";
-// ispis dokumenata iz baze u konzoli
-chatroom1.getChats(d => {
-    console.log(d.room);
-})
-////////////////////////////////////////////////////////
+// DOM
 let lista = document.querySelector("section ul");
-let chatUI = new ChatUI(lista);
-console.log(chatUI.list);
-
-// ispis dokumenata na stranici
-chatroom1.getChats(d => {
-    chatUI.templateLI(d);
-})
-
-////////////////////////////////////////////////////////
-
 let formSend = document.querySelector("#messageForm");
 let formUsername = document.querySelector("#usernameForm");
+let inputSend = document.querySelector("#message");
+let inputUsername = document.querySelector("#username");
 
+// instance klasa
+let chatroom = new Classroom("js", "mikamikic");
+let chatUI = new ChatUI(lista);
+
+// ispis dokumenata iz baze u konzoli
+chatroom.getChats(d => {
+    console.log(d.room);
+});
+
+// ispis dokumenata na stranici
+chatroom.getChats(d => {
+    chatUI.templateLI(d);
+});
+
+// Kada je submit dugme Send posalji poruku
 formSend.addEventListener("submit", (e) => {
     e.preventDefault();
-    let inputSendValue = message.value;
+    let inputSendValue = inputSend.value;
     if (inputSendValue.trim().length > 0) {
-        chatroom1.addChat(inputSendValue)
+        chatroom.addChat(inputSendValue)
             .then(() => {
                 message.value = "";
             }).catch((err) => {
@@ -60,14 +39,11 @@ formSend.addEventListener("submit", (e) => {
     }
 
 });
+
+// Kada je submit dugme Update izmeni korisnicko ime
 formUsername.addEventListener("submit", e => {
     e.preventDefault();
-
-    let inputUsername = document.querySelector("#username");
     let inputUsernameValue = inputUsername.value;
-
-    // chatroom1.username = inputUsernameValue;
-    chatroom1.updateUsername(inputUsernameValue);
-    // moze i ovako formUsername.reset();
+    chatroom.updateUsername(inputUsernameValue);
     inputUsername.value = "";
 });
