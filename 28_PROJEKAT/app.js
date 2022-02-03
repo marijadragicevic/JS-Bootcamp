@@ -17,7 +17,7 @@ chatroom2.getChats(d => {
     console.log(d);
 });
 
-let chatroom3 = new Classroom("js", "pera");
+// let chatroom3 = new Classroom("js", "p er a");
 // chatroom3.addChat("Neki tekst").then(() => {
 //     console.log(`Uspesno dodat chat`);
 // }).catch((err) => {
@@ -38,3 +38,25 @@ console.log(chatUI.list);
 chatroom1.getChats(d => {
     chatUI.templateLI(d);
 })
+
+////////////////////////////////////////////////////////
+
+let formSend = document.querySelector("#messageForm");
+let formUsername = document.querySelector("#usernameForm");
+
+formSend.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let inputSendValue = message.value;
+    if (inputSendValue.trim().length > 0) {
+        chatroom1.addChat(inputSendValue)
+            .then(() => {
+                message.value = "";
+            }).catch((err) => {
+                console.log(err);
+            });
+    }
+    else {
+        alert("Wrong input!");
+    }
+
+});

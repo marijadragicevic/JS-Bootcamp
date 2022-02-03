@@ -9,7 +9,13 @@ export class Classroom {
         this._room = rm;
     }
     set username(usr) {
-        this._username = usr;
+        if (usr.length >= 2 && usr.length <= 10 && !usr.includes(" ")) {
+            this._username = usr;
+        }
+        else {
+            alert(`Wrong input!`);
+        }
+
     }
     // geteri polja
     get room() {
@@ -41,38 +47,19 @@ export class Classroom {
             .orderBy("created_at")
             .onSnapshot(snapshot => {
                 snapshot.docChanges().forEach(change => {
-                    // console.log(change.type); //proveravamo koja je promena nastala
-                    // if (change.type === "added") {
-                    //     console.log(`Promena u bazi`);
-                    // }
                     if (change.type === "added") {
-                        // console.log(change.doc.data());
-                        callback(change.doc.data());// prosledjivanje dokumenta na ispis(ispis realizujemo kada realizujemo callback)
+                        callback(change.doc.data());
                     }
 
                 });
             })
     }
 
-
-
-
+    updateUsername(newUsername) {
+        this.username = newUsername
+    }
+    updateRoom(newRoom) {
+        this.room = newRoom;
+    }
     // ne stavljmao  then i cacth u metodu u klasi vec kada pozivamo metodu pisemo then i catch
-    // async addChat(poruka) {
-    //     let newDoc = await db.collection("chats")
-    //         .add({
-    //             message: poruka,
-    //             username: this.username,
-    //             room: this.room,
-    //             created_at: firebase.firestore.Timestamp.fromDate(new Date())
-    //         })
-    //         .then(() => {
-    //             console.log(`Uspesno dodat chat`);
-    //         }).catch((err) => {
-    //             console.log(`Greska ${err}`);
-    //         });
-
-    //     return newDoc;
-
-    // }
 }
