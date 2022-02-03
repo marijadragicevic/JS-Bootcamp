@@ -56,5 +56,4 @@ export class Classroom {
     updateRoom(newRoom) {
         this.room = newRoom;
     }
-    // ne stavljmao  then i cacth u metodu u klasi vec kada pozivamo metodu pisemo then i catch
 }
