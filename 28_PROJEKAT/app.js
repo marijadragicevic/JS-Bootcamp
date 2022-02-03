@@ -60,3 +60,14 @@ formSend.addEventListener("submit", (e) => {
     }
 
 });
+formUsername.addEventListener("submit", e => {
+    e.preventDefault();
+
+    let inputUsername = document.querySelector("#username");
+    let inputUsernameValue = inputUsername.value;
+
+    // chatroom1.username = inputUsernameValue;
+    chatroom1.updateUsername(inputUsernameValue);
+    // moze i ovako formUsername.reset();
+    inputUsername.value = "";
+});

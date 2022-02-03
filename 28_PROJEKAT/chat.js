@@ -56,7 +56,7 @@ export class Classroom {
     }
 
     updateUsername(newUsername) {
-        this.username = newUsername
+        this.username = newUsername;
     }
     updateRoom(newRoom) {
         this.room = newRoom;
