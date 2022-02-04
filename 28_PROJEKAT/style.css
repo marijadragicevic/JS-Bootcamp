@@ -12,6 +12,11 @@
     width: 95%;
     margin: auto;
 }
+
+.activeBtn{
+    background-color: green;
+    border-radius: 0px 10px;
+}
 /* RESPONSIVE */
 @media (max-width:786px){
 
@@ -61,7 +66,7 @@ nav button:hover{
     cursor: pointer;
     transition: 0.6s ease;
 }
-nav button:active{
+nav button:focus{
     background-color: green;
 }
 
@@ -86,7 +91,20 @@ ul li p{
     color: #777;
     font-size: 0.8rem;
 }
-
+/* NOTIFICATION SECTION */
+.changeUsername {
+    display: flex;
+    justify-content: flex-start;
+}
+.changeUsername .notification {
+    font-size: 1.2rem;
+    background-color: rgb(99, 99, 236);
+    padding: 15px 20px;
+    border-radius: 10px 10px 10px 0px ;
+    color: white;
+    margin-bottom: 10px;
+    margin-left:20px ;
+}
 /* FORM SECTION */
 form{
     padding: 10px 0px;

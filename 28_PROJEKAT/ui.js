@@ -47,4 +47,8 @@ export class ChatUI {
         li.appendChild(p);
         this.list.appendChild(li);
     }
+
+    clear() {
+        this.list.innerHTML = "";
+    }
 }
