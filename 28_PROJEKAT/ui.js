@@ -37,15 +37,31 @@ export class ChatUI {
         return fullInfo;
     }
 
-    templateLI(data) {
-        let li = document.createElement("li");
+    templateLI(doc) {
+        let data = doc.data();
         let p = document.createElement("p");
+        let li = document.createElement("li");
+        li.id = doc.id;
+        li.classList.add(doc.data().username);
 
         li.innerHTML = `${data.username} : ${data.message}`;
-        p.innerHTML = this.formatDateTime(data.created_at.toDate());
+        p.innerHTML = `<span>${this.formatDateTime(data.created_at.toDate())}</span> <i class="fas fa-trash-alt"></i>`
 
         li.appendChild(p);
         this.list.appendChild(li);
+    }
+
+    // Metod za ispis poruka u zavisnosti od username-a
+    reorderMessages(user) {
+        let allUser = document.querySelectorAll(".user");
+        let sameUserMessages = document.querySelectorAll(`.${user}`);
+
+        allUser.forEach(user => {
+            user.classList.remove("user");
+        });
+        sameUserMessages.forEach(message => {
+            message.classList.add("user");
+        });
     }
 
     clear() {

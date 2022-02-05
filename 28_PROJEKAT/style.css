@@ -90,7 +90,24 @@ ul li{
 ul li p{
     color: #777;
     font-size: 0.8rem;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
 }
+ul .user {
+    align-self: flex-end;
+    background-color: rgb(128, 151, 255);
+    border-radius: 10px 0px 10px 10px;
+    color: white;
+}
+ul .user p{
+    display: flex;
+    flex-direction: row-reverse ;
+}
+ul .user p span, ul .user p i{
+    color: white;
+}
+
 /* NOTIFICATION SECTION */
 .changeUsername {
     display: flex;
@@ -119,14 +136,14 @@ form .container{
     align-items: center;
     flex-wrap: wrap;
 }
-form input[type="text"] {
+form input[type="text"],textarea {
     border: none;
     border-radius: 5px;
     font-size: 1.1rem;
     padding: 5px 10px;
     flex:0 0 70%;
 }
-form input[type="text"]:focus {
+form input[type="text"]:focus,textarea:focus {
     outline: none;
     border: 2px solid orange;
 }
