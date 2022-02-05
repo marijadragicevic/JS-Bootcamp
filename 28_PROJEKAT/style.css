@@ -14,7 +14,7 @@
 }
 
 .activeBtn{
-    background-color: green;
+    background-color: rgb(215, 235, 34);
     border-radius: 0px 10px;
 }
 /* RESPONSIVE */
@@ -65,9 +65,6 @@ nav button:hover{
     border-radius: 0px 10px;
     cursor: pointer;
     transition: 0.6s ease;
-}
-nav button:focus{
-    background-color: green;
 }
 
 /* MESSAGE SECTION */

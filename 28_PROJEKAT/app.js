@@ -16,54 +16,29 @@ let nav = document.querySelector("nav");
 let notification = document.querySelector(".changeUsername");
 let ispisSection = document.querySelector(".ispis");
 
-// uzmianje vrednosti iz localStorage-a
-function checkUsername() {
-    if (localStorage.username) {
+// FUNKCIJE
+// vrsimo proveru localStorage-a
+function check(x, y) { return (x) ? x : y; }
 
-        return localStorage.username;
-    }
-    else {
-        return "anonymous";
-    }
-}
-function checkRoom() {
-    if (localStorage.room) {
-        return localStorage.room;
-    }
-    else {
-        return "general";
-    }
-}
 function checkColor(tag) {
-    if (localStorage.backgroundColor) {
-        tag.style.backgroundColor = localStorage.backgroundColor;
-        return tag;
-    }
-    else {
-        tag.style.backgroundColor = "#ffffff";
-        return tag;
-    }
+    let c = check(localStorage.backgroundColor, "#ffffff");
+    tag.style.backgroundColor = c;
 }
-// poziv funkcije za pozadinsku boju; ostaje poslednja boja koja je izabrana
-checkColor(ispisSection);
+function checkActiveBtn() {
+    let id = check(localStorage.room, "general");
+    let tag = document.querySelector(`#${id}`);
+    tag.classList.add("activeBtn");
+}
 
-// instance klasa
-let chatroom = new Classroom(checkRoom(), checkUsername());
-let chatUI = new ChatUI(lista);
+// prikazuju se najskorije poruke
 
-// Ispis dokumenta iz db na stranici
-chatroom.getChats(d => {
-    chatUI.templateLI(d);
-    chatUI.reorderMessages(checkUsername());
-});
-
-// Funkcija koja ispisuje obavestenje o promeni Username-a
+// ispisuje obavestenje o promeni Username-a
 function displayNotification(p) {
     let interval = null;
-    let a = checkUsername();
+    let a = check(localStorage.username, "anonymous");
     let br = 0;
     if (interval === null) {
-        if (p.length === a.length && !p.includes(a) || (p.length > a.length || p.length < a.length)) {
+        if ((p.length === a.length && !p.includes(a)) || (p.length > a.length || p.length < a.length)) {
             interval = setInterval(() => {
                 notification.innerHTML = `<p class="notification">Username is set to ${p} </p>`;
                 br++;
@@ -76,17 +51,31 @@ function displayNotification(p) {
         }
     }
 }
+// pozivi funkcija
+checkColor(ispisSection);
+checkActiveBtn();
 
-// Kada je submit dugme Send posalji poruku
+// INSTANCE KLASA
+let chatroom = new Classroom(check(localStorage.room, "general"), check(localStorage.username, "anonymous"));
+let chatUI = new ChatUI(lista);
+
+// ISPIS DOKUMENATA IZ DB NA STRANICI
+chatroom.getChats(d => {
+    chatUI.templateLI(d);
+    chatUI.reorderMessages(check(localStorage.username, "anonymous"));
+});
+
+// EVENT LISTENERS
+// SUBMIT DUGME SEND = POSALJI PORUKU
 formSend.addEventListener("submit", (e) => {
     e.preventDefault();
     let textareaSendValue = textareaSend.value;
     textareaSend.value = "";
     if (textareaSendValue.trim().length > 0) {
         chatroom.addChat(textareaSendValue)
-            .then(() => console.log(`Radi`))
+            .then(() => console.log(`Message sent`))
             .catch((err) => {
-                console.log(err);
+                console.log(`Error ${err}`);
             });
     }
     else {
@@ -94,7 +83,7 @@ formSend.addEventListener("submit", (e) => {
     }
 });
 
-// Kada je submit dugme Update izmeni korisnicko ime
+// SUBMIT DUGME UPDATE = IZMENI KORISNICKO IME
 formUsername.addEventListener("submit", e => {
     e.preventDefault();
     let inputUsernameValue = inputUsername.value;
@@ -103,26 +92,32 @@ formUsername.addEventListener("submit", e => {
     if (inputUsernameValue.length >= 2 && inputUsernameValue.length <= 10 && !inputUsernameValue.includes(" ")) {
         displayNotification(inputUsernameValue);
         localStorage.setItem("username", inputUsernameValue);
-        chatUI.reorderMessages(checkUsername());
+        chatUI.reorderMessages(check(localStorage.username, "anonymous"));
     }
     inputUsername.value = "";
 });
 
-// Kada se klikne na dugme u nav baru da se otvori ta soba
+//KLIK NA DUGME U NAVBARU = OTVORI SE TA SOBA
 nav.addEventListener("click", e => {
     e.preventDefault();
+    let activeBtnClass = document.querySelectorAll(".activeBtn");
+    activeBtnClass.forEach(element => {
+        element.classList.remove("activeBtn");
+    });
+
     if (e.target.tagName === "BUTTON") {
+        e.target.classList.add("activeBtn");
         chatUI.clear();
         chatroom.updateRoom(e.target.id);
         localStorage.setItem("room", e.target.id);
         chatroom.getChats(d => {
             chatUI.templateLI(d);
-            chatUI.reorderMessages(checkUsername());
+            chatUI.reorderMessages(check(localStorage.username, "anonymous"));
         });
     }
 });
 
-// Kada se klikne na update color da se promeni boja pozadine ceta
+// KLIK NA DUGME UPDATE COLOR = MENJA SE POZADINSKA BOJA CETA
 formColor.addEventListener("submit", function (e) {
     e.preventDefault();
     let inputColorValue = inputColor.value;
@@ -132,7 +127,7 @@ formColor.addEventListener("submit", function (e) {
     localStorage.setItem("backgroundColor", inputColorValue);
 });
 
-// Kada se klikne na Set dates da se prikazu poruke u tom vremenskom intervalu iz te sobe
+// KLIK NA DUGME SET DATES = PRIKAZ PORUKA U IZABRANOM VREMSKOM INTERVALU IZ TE SOBE
 formDate.addEventListener("submit", function (e) {
     e.preventDefault();
     let inputStartDateValue = inputStartDate.value;
@@ -144,17 +139,19 @@ formDate.addEventListener("submit", function (e) {
     else {
         chatroom.getMessages(inputStartDateValue, inputDueDateValue, (d) => {
             chatUI.templateLI(d);
-            chatUI.reorderMessages(checkUsername());
+            chatUI.reorderMessages(check(localStorage.username, "anonymous"));
         });
     }
+    inputStartDate.value = "";
+    inputDueDate.value = ""
 });
 
-// Kada se klikne na kanticu da se izbrise poruka
+// KLOK NA KANTICU = BRISANJE PORUKE 
 ispisSection.addEventListener("click", e => {
     e.preventDefault();
     if (e.target.tagName === "I") {
         let li = event.target.parentElement.parentElement;
-        if (li.classList.contains(checkUsername())) {
+        if (li.classList.contains(check(localStorage.username, "anonymous"))) {
             if (confirm("Are you sure you want to delete this message?")) {
                 li.remove();
                 chatroom.deleteChat(li.id);

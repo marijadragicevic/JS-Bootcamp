@@ -4,10 +4,9 @@ export class Classroom {
         this.room = rm;
         this.username = usr;
         this.chats = db.collection("chats");
-        //kada nam treba nesto i mora da bude predefinisano,stvljamo to u konstr zato sto se on sigurno ocita
-        this.unsub = false; // Odreditili smo da je false kao signal da je stranica 1. put ucitana
+        this.unsub = false;
     }
-    // seteri polja
+    // Seteri polja
     set room(rm) {
         this._room = rm;
     }
@@ -19,12 +18,23 @@ export class Classroom {
             alert(`Wrong input!`);
         }
     }
-    // geteri polja
+    // Geteri polja
     get room() {
         return this._room;
     }
     get username() {
         return this._username;
+    }
+
+    updateUsername(newUsername) {
+        this.username = newUsername;
+    }
+
+    updateRoom(newRoom) {
+        this.room = newRoom;
+        if (this.unsub) {
+            this.unsub();
+        }
     }
 
     // Dodavanje nove poruke
@@ -39,9 +49,8 @@ export class Classroom {
         return response;
     }
 
-    // kreirati callback metod getChats()
+    // Callback metod getChats()
     getChats(callback) {
-        // stavljamo sve metode u promenljivu i pozivamo je kao funkciju unsub();
         this.unsub = this.chats
             .where("room", "==", this.room)
             .orderBy("created_at")
@@ -50,15 +59,14 @@ export class Classroom {
                     if (change.type === "added") {
                         callback(change.doc);
                     }
-
                 });
             });
     }
 
-    // poziv getChats i samo u if uporediti vremena ? ili ova metoda
+    // Callback mestod getMessages()-dohvatanje dokumenata koji su nastali u odredjenom vrenskom periodu
     getMessages(date1, date2, callback) {
         date1 = firebase.firestore.Timestamp.fromDate(new Date(date1));
-        date2 = firebase.firestore.Timestamp.fromDate(new Date(date2))
+        date2 = firebase.firestore.Timestamp.fromDate(new Date(date2));
         this.chats
             .where("room", "==", this.room)
             .where("created_at", ">", date1)
@@ -69,20 +77,8 @@ export class Classroom {
                     if (change.type === "added") {
                         callback(change.doc);
                     }
-
                 });
             });
-    }
-
-    updateUsername(newUsername) {
-        this.username = newUsername;
-    }
-
-    updateRoom(newRoom) {
-        this.room = newRoom;
-        if (this.unsub != false) { // ovo je signal - unsub vise nije false nego je u getChats postalo funkcija
-            this.unsub(); // unsub je sada funkcija i poziavam je sa zagradama
-        }
     }
 
     // Brisanje poruke iz baze
@@ -90,9 +86,9 @@ export class Classroom {
         this.chats
             .doc(id)
             .delete()
-            .then((result) => {
-                alert('Your message is deleted');
-            }).catch((err) => {
+            .then(() => {
+                alert('Your message has been deleted');
+            }).catch(err => {
                 console.log(`Error ${err}`);
             });
     }

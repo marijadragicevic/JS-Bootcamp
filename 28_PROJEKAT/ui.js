@@ -21,8 +21,6 @@ export class ChatUI {
 
         let fullInfo = "";
         if (year === a.getFullYear() && month === a.getMonth() + 1 && day === a.getDate()) {
-            day = String(day).padStart(2, "0");
-            month = String(month).padStart(2, "0");
             hours = String(hours).padStart(2, "0");
             min = String(min).padStart(2, "0");
             fullInfo = `${hours}:${min}`;
@@ -45,13 +43,13 @@ export class ChatUI {
         li.classList.add(doc.data().username);
 
         li.innerHTML = `${data.username} : ${data.message}`;
-        p.innerHTML = `<span>${this.formatDateTime(data.created_at.toDate())}</span> <i class="fas fa-trash-alt"></i>`
+        p.innerHTML = `<span>${this.formatDateTime(data.created_at.toDate())}</span> <i class="fas fa-trash-alt"></i>`;
 
         li.appendChild(p);
         this.list.appendChild(li);
     }
 
-    // Metod za ispis poruka u zavisnosti od username-a
+    // Metod za preraspodelu poruka u zavisnosti od username-a
     reorderMessages(user) {
         let allUser = document.querySelectorAll(".user");
         let sameUserMessages = document.querySelectorAll(`.${user}`);
