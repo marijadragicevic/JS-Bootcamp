@@ -11,60 +11,79 @@
 </head>
 
 <body>
-
-    <!-- HEADER SECTION -->
-    <header>
-        <div class="container">
-            <h2>ITBootcamp Chat</h2>
-            <h4>Choose a chatroom</h4>
-        </div>
+    <!-- POCETNA STRANA -->
+    <header class="header">
+        <ul>
+            <li><a href=""> About</a></li>
+            <li><a href="">Contact</a></li>
+        </ul>
+        <hgroup>
+            <h2> Welcome to Chat</h2>
+            <h3>Click on a button below if you want to start chatting</h3>
+            <button type="button" class="btn"> OPEN CHATROOM</button>
+        </hgroup>
     </header>
 
-    <!-- NAVBAR -->
-    <nav>
-        <button id="general">#general</button>
-        <button id="js">#js</button>
-        <button id="homeworks">#homeworks</button>
-        <button id="tests">#tests</button>
-    </nav>
 
-    <!-- ISPIS PORUKA -->
-    <section class="ispis">
-        <ul>
-        </ul>
-        <div class="changeUsername">
-        </div>
+    <!-- CHAT SECTION -->
+    <section class="chat">
+        <!-- HEADER SECTION -->
+        <header>
+            <div class="container">
+                <button type="button" class="exitBtn">Exit Chat <i class="fas fa-sign-out-alt"></i></button>
+            </div>
+        </header>
+
+        <!-- NAVBAR -->
+        <nav>
+            <button id="general">#general</button>
+            <button id="js">#js</button>
+            <button id="homeworks">#homeworks</button>
+            <button id="tests">#tests</button>
+        </nav>
+
+        <!-- ISPIS PORUKA -->
+        <section class="ispis">
+            <ul>
+            </ul>
+            <div class="changeUsername">
+            </div>
+        </section>
+
+        <!-- FORMA -->
+
+        <form action="" id="messageForm">
+            <div class="container">
+                <textarea id="message" placeholder=" Your message..." name="Your message"></textarea>
+                <input type="submit" value="Send">
+            </div>
+        </form>
+
+        <form action="" id="usernameForm">
+            <div class="container">
+                <input type="text" id="username" placeholder=" Update username...">
+                <input type="submit" value="Update">
+            </div>
+        </form>
+        <p id="options">Click to see more options</p>
+
+        <form action="" id="colorForm">
+            <div class="container">
+                <input type="color" name="" id="color" placeholder="Choose background color....." value="#FFFFFF">
+                <input type="submit" id="updateColor" value="Update color">
+            </div>
+        </form>
+
+        <form action="" id="setDate">
+            <div class="container">
+                <input type="datetime-local" name="" id="startDate">
+                <input type="datetime-local" name="" id="dueDate">
+                <input type="submit" value="Set dates">
+            </div>
+        </form>
+
     </section>
 
-    <!-- FORMA -->
-    <form action="" id="colorForm">
-        <div class="container">
-            <input type="color" name="" id="color" placeholder="Choose background color....." value="#FFFFFF">
-            <input type="submit" id="updateColor" value="Update color">
-        </div>
-    </form>
-
-    <form action="" id="setDate">
-        <div class="container">
-            <input type="datetime-local" name="" id="startDate">
-            <input type="datetime-local" name="" id="dueDate">
-            <input type="submit" value="Set dates">
-        </div>
-    </form>
-
-    <form action="" id="messageForm">
-        <div class="container">
-            <textarea id="message" placeholder=" Your message..." name="Your message"></textarea>
-            <input type="submit" value="Send">
-        </div>
-    </form>
-
-    <form action="" id="usernameForm">
-        <div class="container">
-            <input type="text" id="username" placeholder=" Update username...">
-            <input type="submit" value="Update">
-        </div>
-    </form>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>

@@ -15,6 +15,12 @@ let inputDueDate = document.querySelector("#dueDate");
 let nav = document.querySelector("nav");
 let notification = document.querySelector(".changeUsername");
 let ispisSection = document.querySelector(".ispis");
+let header = document.querySelector(".header");
+let chatSection = document.querySelector(".chat");
+let headerBtn = document.querySelector(".btn");
+let exitBtn = document.querySelector(".exitBtn");
+let moreOptions = document.querySelector("#options");
+
 
 // FUNKCIJE
 // vrsimo proveru localStorage-a
@@ -66,6 +72,38 @@ chatroom.getChats(d => {
 });
 
 // EVENT LISTENERS
+// DUGME OPEN CHATROOM = PRIKAZ CHAT-A
+headerBtn.addEventListener("click", e => {
+    e.preventDefault();
+    header.style.display = "none";
+    chatSection.style.display = "block";
+});
+
+// DUGME EXIT CHAT = VRACA NA POCETNU STRANU
+exitBtn.addEventListener("click", e => {
+    e.preventDefault();
+    chatSection.style.display = "none";
+    header.style.display = "block";
+});
+
+// More options = prikazuje colorform i setDate
+moreOptions.addEventListener("click", e => {
+    e.preventDefault();
+    moreOptions.innerHTML = "Double click to go back";
+    moreOptions.style.borderRadius = "0px 0px 10px 10px";
+    formColor.style.display = "flex";
+    formDate.style.display = "flex";
+});
+moreOptions.addEventListener("dblclick", e => {
+    e.preventDefault();
+    moreOptions.style.borderRadius = "0px";
+    moreOptions.innerHTML = "Click to see more options";
+    formColor.style.display = "none";
+    formDate.style.display = "none";
+    moreOptions.style.display = "block";
+});
+
+
 // SUBMIT DUGME SEND = POSALJI PORUKU
 formSend.addEventListener("submit", (e) => {
     e.preventDefault();
