@@ -1,5 +1,4 @@
 export class Classroom {
-
     constructor(rm, usr) {
         this.room = rm;
         this.username = usr;
@@ -13,9 +12,6 @@ export class Classroom {
     set username(usr) {
         if (usr.length >= 2 && usr.length <= 10 && !usr.includes(" ")) {
             this._username = usr;
-        }
-        else {
-            alert(`Wrong input!`);
         }
     }
     // Geteri polja
@@ -43,8 +39,8 @@ export class Classroom {
             message: mess,
             username: this.username,
             room: this.room,
-            created_at: firebase.firestore.Timestamp.fromDate(new Date())
-        }
+            created_at: firebase.firestore.Timestamp.fromDate(new Date()),
+        };
         let response = await this.chats.add(docChat);
         return response;
     }
@@ -54,8 +50,8 @@ export class Classroom {
         this.unsub = this.chats
             .where("room", "==", this.room)
             .orderBy("created_at")
-            .onSnapshot(snapshot => {
-                snapshot.docChanges().forEach(change => {
+            .onSnapshot((snapshot) => {
+                snapshot.docChanges().forEach((change) => {
                     if (change.type === "added") {
                         callback(change.doc);
                     }
@@ -72,8 +68,8 @@ export class Classroom {
             .where("created_at", ">", date1)
             .where("created_at", "<", date2)
             .orderBy("created_at")
-            .onSnapshot(snapshot => {
-                snapshot.docChanges().forEach(change => {
+            .onSnapshot((snapshot) => {
+                snapshot.docChanges().forEach((change) => {
                     if (change.type === "added") {
                         callback(change.doc);
                     }
@@ -87,11 +83,10 @@ export class Classroom {
             .doc(id)
             .delete()
             .then(() => {
-                alert('Your message has been deleted');
-            }).catch(err => {
+                alert("Your message has been deleted");
+            })
+            .catch((err) => {
                 console.log(`Error ${err}`);
             });
     }
-
 }
-

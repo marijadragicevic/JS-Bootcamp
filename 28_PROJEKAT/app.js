@@ -2,127 +2,199 @@ import { Classroom } from "./chat.js";
 import { ChatUI } from "./ui.js";
 
 // DOM
-let lista = document.querySelector("section ul");
-let formSend = document.querySelector("#messageForm");
-let formUsername = document.querySelector("#usernameForm");
-let formColor = document.querySelector("#colorForm");
-let formDate = document.querySelector("#setDate");
-let textareaSend = document.querySelector("#message");
+let messagesListContainer = document.querySelector(".main__content--top");
+let messagesList = document.querySelector(".main__content-list");
+const formSend = document.querySelector("#message-form");
+const formUsername = document.querySelector("#user-form");
+const formColor = document.querySelector("#apearance-form");
+
+const sendBtn = document.querySelector(".main__content-chat-input-send");
+let formInput = document.querySelector("#chat-input");
 let inputUsername = document.querySelector("#username");
 let inputColor = document.querySelector("#color");
 let inputStartDate = document.querySelector("#startDate");
 let inputDueDate = document.querySelector("#dueDate");
-let nav = document.querySelector("nav");
-let notification = document.querySelector(".changeUsername");
-let ispisSection = document.querySelector(".ispis");
-let header = document.querySelector(".header");
-let chatSection = document.querySelector(".chat");
-let headerBtn = document.querySelector(".btn");
-let exitBtn = document.querySelector(".exitBtn");
-let moreOptions = document.querySelector("#options");
+const notificationDialog = document.querySelector(".notification-dialog");
+const notificationDialogContent = document.querySelector(".notification-dialog__text");
+const notificationDialogIcon = document.querySelector(".notification-dialog__icon");
 
+// UI toggle
+const expandBtnList = document.querySelectorAll(".aside__content-btn-expand");
+const apearanceContainer = document.querySelector("#apearance-settings");
+const userContainer = document.querySelector("#user-settings");
+const headerArrow = document.querySelector("#header__icon-arrow");
+const headerFunnel = document.querySelector("#header__icon-funnel");
+
+const channelList = document.querySelector(".channels-list");
+
+const main = document.querySelector(".main");
+const aside = document.querySelector(".aside");
+const searchDialog = document.querySelector(".search-dialog");
+const searchClose = document.querySelector(".search-dialog__close");
+
+expandBtnList?.length > 0 &&
+    expandBtnList?.forEach((expandBtn) => {
+        expandBtn?.addEventListener("click", (event) => {
+            let id = expandBtn?.id;
+
+            let settingsForm = null;
+
+            if (id === "expand-appearance") {
+                settingsForm = apearanceContainer;
+            } else {
+                settingsForm = userContainer;
+            }
+
+            if (settingsForm) {
+                if (settingsForm?.classList.contains("active")) {
+                    settingsForm?.classList.remove("active");
+                    expandBtn.innerHTML = '<i class="bi bi-chevron-up"></i>';
+                } else {
+                    settingsForm?.classList.add("active");
+                    expandBtn.innerHTML = '<i class="bi bi-chevron-down"></i>';
+                }
+            }
+        });
+    });
+
+headerArrow?.addEventListener("click", (event) => {
+    if (main?.classList.contains("active")) {
+        headerArrow.innerHTML = '<i class="bi bi-arrow-left"></i>';
+    } else {
+        headerArrow.innerHTML = '<i class="bi bi-arrow-right"></i>';
+    }
+
+    aside.classList.toggle("active");
+    main.classList.toggle("active");
+});
+
+headerFunnel?.addEventListener("click", (event) => {
+    searchDialog?.classList.toggle("active");
+});
+
+searchClose?.addEventListener("click", () => {
+    searchDialog?.classList.remove("active");
+});
 
 // FUNKCIJE
 // vrsimo proveru localStorage-a
-function check(x, y) { return (x) ? x : y; }
+function check(x, y) {
+    return x ? x : y;
+}
 
 function checkColor(tag) {
-    let c = check(localStorage.backgroundColor, "#ffffff");
-    tag.style.backgroundColor = c;
+    let color = check(localStorage.backgroundColor, "#ffffff");
+    tag.style.backgroundColor = color;
 }
 function checkActiveBtn() {
     let id = check(localStorage.room, "general");
     let tag = document.querySelector(`#${id}`);
-    tag.classList.add("activeBtn");
+    tag.classList.add("active");
+}
+
+function changeNotificationIcon(type = "warning") {
+    if (notificationDialogIcon) {
+        if (type === "success") {
+            notificationDialogIcon.innerHTML = '<i class="bi bi-check2-circle text-success"></i>';
+        } else if (type === "error") {
+            notificationDialogIcon.innerHTML = '<i class="bi bi-exclamation-circle text-danger"></i>';
+        } else {
+            notificationDialogIcon.innerHTML = '<i class="bi bi-exclamation-circle"></i>';
+        }
+    }
+}
+
+function scrollToLastMessage() {
+    const lastMessage = document.querySelector(".main__content-list-chat:last-child");
+    if (lastMessage) {
+        lastMessage.scrollIntoView({ behavior: "smooth" });
+    }
 }
 
 // prikazuju se najskorije poruke
 
-// ispisuje obavestenje o promeni Username-a
-function displayNotification(p) {
+// ispisuje obavestenje o promeni Username-a ------>  IZMENITI OVO
+function displayNotification(newUser) {
     let interval = null;
-    let a = check(localStorage.username, "anonymous");
+    let oldUser = check(localStorage.username, "anonymous");
     let br = 0;
     if (interval === null) {
-        if ((p.length === a.length && !p.includes(a)) || (p.length > a.length || p.length < a.length)) {
+        if (
+            (newUser.length === oldUser.length && !newUser.includes(oldUser)) ||
+            newUser.length > oldUser.length ||
+            newUser.length < oldUser.length
+        ) {
             interval = setInterval(() => {
-                notification.innerHTML = `<p class="notification">Username is set to ${p} </p>`;
+                changeNotificationIcon("success");
+                notificationDialogContent.innerHTML = `Username is set to ${newUser}.`;
+                notificationDialog.classList.add("active");
                 br++;
                 if (br > 30 * 10) {
                     clearInterval(interval);
-                    notification.innerHTML = "";
+                    notificationDialog.classList.remove("active");
+                    notificationDialogContent.innerHTML = "";
                     interval = null;
                 }
             }, 1000 / 100);
         }
     }
 }
+
 // pozivi funkcija
-checkColor(ispisSection);
+checkColor(messagesListContainer);
 checkActiveBtn();
 
 // INSTANCE KLASA
 let chatroom = new Classroom(check(localStorage.room, "general"), check(localStorage.username, "anonymous"));
-let chatUI = new ChatUI(lista);
+let chatUI = new ChatUI(messagesList);
 
 // ISPIS DOKUMENATA IZ DB NA STRANICI
-chatroom.getChats(d => {
+chatroom.getChats((d) => {
     chatUI.templateLI(d);
     chatUI.reorderMessages(check(localStorage.username, "anonymous"));
+    scrollToLastMessage();
 });
 
 // EVENT LISTENERS
-// DUGME OPEN CHATROOM = PRIKAZ CHAT-A
-headerBtn.addEventListener("click", e => {
-    e.preventDefault();
-    header.style.display = "none";
-    chatSection.style.display = "block";
-});
-
-// DUGME EXIT CHAT = VRACA NA POCETNU STRANU
-exitBtn.addEventListener("click", e => {
-    e.preventDefault();
-    chatSection.style.display = "none";
-    header.style.display = "block";
-});
-
-// More options = prikazuje colorform i setDate
-moreOptions.addEventListener("click", e => {
-    e.preventDefault();
-    moreOptions.innerHTML = "Double click to go back";
-    moreOptions.style.borderRadius = "0px 0px 10px 10px";
-    formColor.style.display = "flex";
-    formDate.style.display = "flex";
-});
-moreOptions.addEventListener("dblclick", e => {
-    e.preventDefault();
-    moreOptions.style.borderRadius = "0px";
-    moreOptions.innerHTML = "Click to see more options";
-    formColor.style.display = "none";
-    formDate.style.display = "none";
-    moreOptions.style.display = "block";
-});
-
 
 // SUBMIT DUGME SEND = POSALJI PORUKU
-formSend.addEventListener("submit", (e) => {
+function addNewMessage(e) {
     e.preventDefault();
-    let textareaSendValue = textareaSend.value;
-    textareaSend.value = "";
-    if (textareaSendValue.trim().length > 0) {
-        chatroom.addChat(textareaSendValue)
-            .then(() => console.log(`Message sent`))
+    let formInputValue = formInput.value;
+    formInput.value = "";
+    if (formInputValue?.trim()?.length > 0) {
+        chatroom
+            .addChat(formInputValue)
+            .then(() => {
+                scrollToLastMessage();
+
+                console.log(`Message sent`);
+            })
             .catch((err) => {
                 console.log(`Error ${err}`);
             });
+    } else {
+        changeNotificationIcon("warning");
+        notificationDialogContent.innerHTML = `Please, make sure to enter valid input.`;
+        notificationDialog.classList.add("active");
+
+        setTimeout(() => {
+            notificationDialog.classList.remove("active");
+            notificationDialogContent.innerHTML = "";
+        }, 3 * 1000);
     }
-    else {
-        alert("Wrong input!");
-    }
+}
+
+formSend.addEventListener("submit", (e) => {
+    addNewMessage(e);
+});
+
+sendBtn.addEventListener("click", (event) => {
+    addNewMessage(event);
 });
 
 // SUBMIT DUGME UPDATE = IZMENI KORISNICKO IME
-formUsername.addEventListener("submit", e => {
+formUsername.addEventListener("submit", (e) => {
     e.preventDefault();
     let inputUsernameValue = inputUsername.value;
     chatroom.updateUsername(inputUsernameValue);
@@ -131,26 +203,36 @@ formUsername.addEventListener("submit", e => {
         displayNotification(inputUsernameValue);
         localStorage.setItem("username", inputUsernameValue);
         chatUI.reorderMessages(check(localStorage.username, "anonymous"));
+    } else {
+        changeNotificationIcon("warning");
+        notificationDialogContent.innerHTML = `Please, make sure to enter valid username. Username can not contain spaces and must be at least 2 characters long.`;
+        notificationDialog.classList.add("active");
+
+        setTimeout(() => {
+            notificationDialog.classList.remove("active");
+            notificationDialogContent.innerHTML = "";
+        }, 3 * 1000);
     }
     inputUsername.value = "";
 });
 
 //KLIK NA DUGME U NAVBARU = OTVORI SE TA SOBA
-nav.addEventListener("click", e => {
+channelList.addEventListener("click", (e) => {
     e.preventDefault();
-    let activeBtnClass = document.querySelectorAll(".activeBtn");
-    activeBtnClass.forEach(element => {
-        element.classList.remove("activeBtn");
+    let activeBtnClass = document.querySelectorAll(".aside__content-list-channel.active");
+    activeBtnClass.forEach((element) => {
+        element.classList.remove("active");
     });
 
-    if (e.target.tagName === "BUTTON") {
-        e.target.classList.add("activeBtn");
+    if (e.target.tagName === "LI") {
+        e.target.classList.add("active");
         chatUI.clear();
         chatroom.updateRoom(e.target.id);
         localStorage.setItem("room", e.target.id);
-        chatroom.getChats(d => {
+        chatroom.getChats((d) => {
             chatUI.templateLI(d);
             chatUI.reorderMessages(check(localStorage.username, "anonymous"));
+            scrollToLastMessage();
         });
     }
 });
@@ -159,46 +241,49 @@ nav.addEventListener("click", e => {
 formColor.addEventListener("submit", function (e) {
     e.preventDefault();
     let inputColorValue = inputColor.value;
-    let timer = setTimeout(() => {
-        ispisSection.style.backgroundColor = inputColorValue;
-    }, 1000 / 2);
+    messagesListContainer.style.backgroundColor = inputColorValue;
     localStorage.setItem("backgroundColor", inputColorValue);
 });
 
 // KLIK NA DUGME SET DATES = PRIKAZ PORUKA U IZABRANOM VREMSKOM INTERVALU IZ TE SOBE
-formDate.addEventListener("submit", function (e) {
+searchDialog.addEventListener("submit", function (e) {
     e.preventDefault();
     let inputStartDateValue = inputStartDate.value;
     let inputDueDateValue = inputDueDate.value;
-    chatUI.clear();
-    if (inputStartDateValue === "" || inputDueDateValue === "") {
-        alert("Wrong input!");
-    }
-    else {
+    if (inputStartDateValue === "" || inputDueDateValue === "" || inputStartDateValue >= inputDueDateValue) {
+        notificationDialog.classList.add("active");
+        notificationDialogContent.innerHTML = `Please, select valid dates.`;
+        changeNotificationIcon("error");
+
+        setTimeout(() => {
+            notificationDialog.classList.remove("active");
+            notificationDialogContent.innerHTML = "";
+        }, 3 * 1000);
+    } else {
+        chatUI.clear();
         chatroom.getMessages(inputStartDateValue, inputDueDateValue, (d) => {
             chatUI.templateLI(d);
             chatUI.reorderMessages(check(localStorage.username, "anonymous"));
         });
     }
     inputStartDate.value = "";
-    inputDueDate.value = ""
+    inputDueDate.value = "";
+    searchDialog?.classList.remove("active");
 });
 
-// KLOK NA KANTICU = BRISANJE PORUKE 
-ispisSection.addEventListener("click", e => {
-    e.preventDefault();
-    if (e.target.tagName === "I") {
+// KLIK NA KANTICU = BRISANJE PORUKE
+messagesList.addEventListener("click", (event) => {
+    event.preventDefault();
+    if (event.target.tagName === "I") {
         let li = event.target.parentElement.parentElement;
-        if (li.classList.contains(check(localStorage.username, "anonymous"))) {
+        const currentUsername = check(localStorage.username, "anonymous");
+        if (li.classList.contains(currentUsername)) {
             if (confirm("Are you sure you want to delete this message?")) {
                 li.remove();
                 chatroom.deleteChat(li.id);
             }
-        }
-        else {
+        } else {
             li.remove();
         }
     }
 });
-
-

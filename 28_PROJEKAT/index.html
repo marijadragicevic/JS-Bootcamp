@@ -1,109 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Chat App</title>
+        <link rel="stylesheet" href="style.css" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css"
+        />
+        <!-- <script src="https://kit.fontawesome.com/337d7d2383.js" crossorigin="anonymous"></script> -->
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat App</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/337d7d2383.js" crossorigin="anonymous"></script>
-</head>
+    <body>
+        <div class="app">
+            <header class="header">
+                <div class="header__content">
+                    <div class="header__content-icon" id="header__icon-arrow">
+                        <i class="bi bi-arrow-left"></i>
+                    </div>
+                    <div class="header__content-icon" id="header__icon-funnel">
+                        <i class="bi bi-funnel"></i>
+                    </div>
+                </div>
+            </header>
+            <!-- ASIDE SECTION -->
+            <aside class="aside active">
+                <div class="aside__content">
+                    <div class="aside__content--top">
+                        <!-- COLORS -->
+                        <div class="aside__content-settings active" id="apearance-settings">
+                            <div class="aside__content-settings-header">
+                                <div class="aside__content-settings--left">
+                                    <div class="aside__content-settings-icon">
+                                        <i class="bi bi-palette"></i>
+                                    </div>
+                                    <div class="aside__content-settings-title">Appearance</div>
+                                </div>
+                                <div
+                                    class="aside__content-settings--right aside__content-btn-expand"
+                                    id="expand-appearance"
+                                >
+                                    <i class="bi bi-chevron-down"></i>
+                                </div>
+                            </div>
+                            <form class="aside__content-form" id="apearance-form">
+                                <div class="aside__content-input">
+                                    <input
+                                        type="color"
+                                        id="color"
+                                        placeholder="Choose background color....."
+                                        value="#FFFFFF"
+                                        class="aside__content-input-type"
+                                    />
+                                    <button class="aside__content-input-update" type="submit" id="updateColor">
+                                        <i class="bi bi-paint-bucket"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <!--ACTIVE USER -->
+                        <div class="aside__content-settings active" id="user-settings">
+                            <div class="aside__content-settings-header">
+                                <div class="aside__content-settings--left">
+                                    <div class="aside__content-settings-icon">
+                                        <!-- ADD INITIALS USING INNER HTML -->
+                                        <span>M</span>
+                                    </div>
+                                    <div class="aside__content-settings-title">Active user</div>
+                                </div>
+                                <div class="aside__content-settings--right aside__content-btn-expand" id="expand-user">
+                                    <i class="bi bi-chevron-down"></i>
+                                </div>
+                            </div>
+                            <form class="aside__content-form" id="user-form">
+                                <div class="aside__content-input">
+                                    <input
+                                        type="text"
+                                        id="username"
+                                        placeholder="Update username..."
+                                        class="aside__content-input-type"
+                                    />
+                                    <button class="aside__content-input-update" type="submit" id="updateColor">
+                                        <i class="bi bi-person"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- CHAT GROUP LIST -->
+                    <div class="aside__content--bottom">
+                        <div class="aside__content-channels-header">
+                            <div class="aside__content-channels-title">Channels:</div>
+                        </div>
+                        <div class="aside__content-list">
+                            <ul class="channels-list">
+                                <li class="aside__content-list-channel" id="general">#general</li>
+                                <li class="aside__content-list-channel" id="js">#js</li>
+                                <li class="aside__content-list-channel" id="homeworks">#homeworks</li>
+                                <li class="aside__content-list-channel" id="tests">#tests</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </aside>
 
-<body>
-    <!-- POCETNA STRANA -->
-    <header class="header">
-        <ul>
-            <li><a href=""> About</a></li>
-            <li><a href="">Contact</a></li>
-        </ul>
-        <hgroup>
-            <h2> Welcome to Chat</h2>
-            <h3>Click on a button below if you want to start chatting</h3>
-            <button type="button" class="btn"> OPEN CHATROOM</button>
-        </hgroup>
-    </header>
+            <!-- MAIN SECTION -->
+            <!-- active -->
+            <main class="main">
+                <div class="main__content">
+                    <div class="main__content--top">
+                        <ul class="main__content-list"></ul>
+                    </div>
+                    <div class="main__content--bottom">
+                        <!-- MESSAGE FORM -->
+                        <form class="main__content-chat-input" id="message-form">
+                            <div class="main__content-chat-input-type">
+                                <input type="text" placeholder="Type Something..." id="chat-input" />
+                            </div>
+                            <div class="main__content-chat-input-send active">
+                                <i class="bi bi-send-fill"></i>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- active -->
+                <form class="search-dialog">
+                    <div class="search-dialog__body">
+                        <div class="search-dialog-input-type">
+                            <span>From:</span>
+                            <input type="datetime-local" name="" id="startDate" placeholder="From" />
+                        </div>
+                        <div class="search-dialog-input-type">
+                            <span>Due:</span>
+                            <input type="datetime-local" name="" id="dueDate" />
+                        </div>
+                        <button type="submit" class="search-dialog-btn">
+                            search
+                            <!-- <i class="bi bi-search"></i> -->
+                        </button>
+                    </div>
+                    <div class="search-dialog__close">
+                        <i class="bi bi-x"></i>
+                    </div>
+                </form>
+            </main>
 
-
-    <!-- CHAT SECTION -->
-    <section class="chat">
-        <!-- HEADER SECTION -->
-        <header>
-            <div class="container">
-                <button type="button" class="exitBtn">Exit Chat <i class="fas fa-sign-out-alt"></i></button>
+            <div class="notification-list">
+                <div class="notification-dialog">
+                    <div class="notification-dialog__body">
+                        <div class="notification-dialog__icon">
+                            <!-- <i class="bi bi-check2-circle text-success"></i> -->
+                        </div>
+                        <div class="notification-dialog__text"></div>
+                    </div>
+                </div>
             </div>
-        </header>
+        </div>
 
-        <!-- NAVBAR -->
-        <nav>
-            <button id="general">#general</button>
-            <button id="js">#js</button>
-            <button id="homeworks">#homeworks</button>
-            <button id="tests">#tests</button>
-        </nav>
-
-        <!-- ISPIS PORUKA -->
-        <section class="ispis">
-            <ul>
-            </ul>
-            <div class="changeUsername">
-            </div>
-        </section>
-
-        <!-- FORMA -->
-
-        <form action="" id="messageForm">
-            <div class="container">
-                <textarea id="message" placeholder=" Your message..." name="Your message"></textarea>
-                <input type="submit" value="Send">
-            </div>
-        </form>
-
-        <form action="" id="usernameForm">
-            <div class="container">
-                <input type="text" id="username" placeholder=" Update username...">
-                <input type="submit" value="Update">
-            </div>
-        </form>
-        <p id="options">Click to see more options</p>
-
-        <form action="" id="colorForm">
-            <div class="container">
-                <input type="color" name="" id="color" placeholder="Choose background color....." value="#FFFFFF">
-                <input type="submit" id="updateColor" value="Update color">
-            </div>
-        </form>
-
-        <form action="" id="setDate">
-            <div class="container">
-                <input type="datetime-local" name="" id="startDate">
-                <input type="datetime-local" name="" id="dueDate">
-                <input type="submit" value="Set dates">
-            </div>
-        </form>
-
-    </section>
-
-
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-firestore.js"></script>
-
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyBVkafVELOFXv_Kv1Xe8p235__oWbr42J8",
-            authDomain: "itbootcamp-js7-39427.firebaseapp.com",
-            projectId: "itbootcamp-js7-39427",
-            storageBucket: "itbootcamp-js7-39427.appspot.com",
-            messagingSenderId: "397984331662",
-            appId: "1:397984331662:web:098f69a05ac89b80f516df",
-            measurementId: "G-SCHV0NV0F4"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        let db = firebase.firestore();
-    </script>
-    <script src="app.js" type="module"></script>
-</body>
-
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"
+        ></script>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-firestore.js"></script>
+        <script>
+            const firebaseConfig = {
+                apiKey: "AIzaSyBVkafVELOFXv_Kv1Xe8p235__oWbr42J8",
+                authDomain: "itbootcamp-js7-39427.firebaseapp.com",
+                projectId: "itbootcamp-js7-39427",
+                storageBucket: "itbootcamp-js7-39427.appspot.com",
+                messagingSenderId: "397984331662",
+                appId: "1:397984331662:web:098f69a05ac89b80f516df",
+                measurementId: "G-SCHV0NV0F4",
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            let db = firebase.firestore();
+        </script>
+        <script src="app.js" type="module"></script>
+    </body>
 </html>
