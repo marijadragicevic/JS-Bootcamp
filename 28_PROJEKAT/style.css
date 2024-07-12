@@ -444,13 +444,109 @@ ul {
     transform: rotate(45deg);
 }
 
-.main__content-chat-input .main__content-chat-input-type {
+/*--------------------------------------------------------------
+# Section Guides
+--------------------------------------------------------------*/
+.section-guide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: -200svw;
+    bottom: 0;
+    left: 150svh;
+    background-color: #00000089;
+    transition: right 0.3s;
+    z-index: 100;
 }
 
-.main.active {
-    /* left: var(--side-w); */
+.section-guide.active {
+    right: 0;
+    left: 0;
 }
 
+.section-guide .section-guide__container {
+    max-width: 500px;
+    max-height: 500px;
+    width: 100%;
+    height: 100%;
+}
+
+.section-guide .section-guide__container .swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.section-guide .section-guide__container .swiper-slide {
+    border-radius: 18px;
+    font-size: 18px;
+    line-height: 150%;
+    font-weight: 500;
+    background-color: #ede9ff;
+    padding: 20px 30px;
+    box-shadow: inset 0 0 5px #d3cfe8;
+}
+
+.section-guide .section-guide__container .swiper-slide .section-guide__container__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.section-guide .section-guide__container .section-guide__container__item img {
+    box-shadow: 0 0 50px #c3c3c3;
+    border-radius: 20px;
+}
+
+.section-guide .section-guide__container .section-guide__container__item span {
+    color: #000c38;
+    font-weight: 600;
+}
+
+.btn-skip {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 5px 20px;
+    border-radius: 50px;
+    background-color: #7faacd;
+    color: #fff;
+}
+
+canvas {
+    overflow-y: hidden;
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+}
+
+.section-guide__container__item__title {
+    position: absolute;
+    background: #ede9ff;
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .section-guide .section-guide__container {
+        max-width: 370px;
+    }
+
+    .section-guide .section-guide__container .swiper-slide {
+        font-size: 16px;
+        padding: 10 15px;
+    }
+
+    .section-guide .section-guide__container .swiper-slide .section-guide__container__item {
+        row-gap: 10px;
+    }
+}
 /*--------------------------------------------------------------
 # Search Dialog
 --------------------------------------------------------------*/
